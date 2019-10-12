@@ -26,14 +26,14 @@ class MqttClient:
         client.on_publish = on_publish
         client.connect(self.host, self.port, 60)
         client.loop_start()
-        print('PUB ThureadNum: {}, ThreadId: {}'.format(thread_num, threading.get_ident()))
+        print('PUB ThreadNum: {}, ThreadId: {}'.format(thread_num, threading.get_ident()))
         while True:
             client.publish(self.topic, 'PUB ThreadNum {} sent at {}'.format(thread_num, str(datetime.now())))
             sleep(1)
 
     def receive_data(self, thread_num):
         def on_connect(client, userdata, flag, rc):
-            client.subscribe('topic/test')
+            client.subscribe(self.topic)
 
         def on_disconnect(client, userdata, flag, rc):
             if rc != 0:
@@ -47,5 +47,5 @@ class MqttClient:
         client.on_disconnect = on_disconnect
         client.on_message = on_message
         client.connect(self.host, self.port, 60)
-        print('SUB ThureadNum: {}, ThreadId: {}'.format(thread_num, threading.get_ident()))
+        print('SUB ThreadMum: {}, ThreadId: {}'.format(thread_num, threading.get_ident()))
         client.loop_forever()
