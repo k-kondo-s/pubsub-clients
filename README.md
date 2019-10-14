@@ -53,3 +53,10 @@ docker run -d --name rbmq \
     -e RABBITMQ_DEFAULT_PASS=guest \
     kenchaaan/rabbitmq-mqtt
 ``` 
+
+# (Appendix) Development
+
+```
+docker build --no-cache -t kenchaaan/pubsub-clients .
+docker push kenchaaan/pubsub-clients
+```
