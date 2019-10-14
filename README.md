@@ -49,7 +49,7 @@ docker run -d --name rbmq \
     -p 5671:5671 \
     -p 5672:5672 \
     -p 1883:1883 \
-    -e RABBITMQ_DEFAULT_USER=user \
-    -e RABBITMQ_DEFAULT_PASS=password \
+    -e RABBITMQ_DEFAULT_USER=guest \
+    -e RABBITMQ_DEFAULT_PASS=guest \
     kenchaaan/rabbitmq-mqtt
 ``` 

@@ -11,4 +11,4 @@ RUN pip install -r /requirements.txt
 
 ENV TZ="Asia/Tokyo"
 
-ENTRYPOINT ["python", "/main.py"]
+ENTRYPOINT ["python", "-u", "/main.py"]
