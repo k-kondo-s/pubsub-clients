@@ -4,8 +4,9 @@ MQTT and AMQP clients running with multiple threads.
 
 # Run
 
-With docker
+## With docker
 
+Example:
 ```bash
 docker run --rm --name pubsub-clients \
     -e T_HOST=172.28.128.3 \
@@ -17,8 +18,9 @@ docker run --rm --name pubsub-clients \
     kenchaaan/pubsub-clients
 ```
 
-directly
+## Directly
 
+Example:
 ```bash
 T_HOST=172.28.128.3 \
 T_PORT=1883 \
@@ -26,7 +28,7 @@ T_PROTOCOL=mqtt \
 T_TOPIC="topic/test" \
 T_THREAD_NUM=2 \
 T_VERBOSE=True \
-venv/bin/python main.py
+python main.py
 ```
 
 # Environment Variables
@@ -38,12 +40,22 @@ venv/bin/python main.py
 |`T_TOPIC`|Topic name|topic/test|
 |`T_PROTOCOL`|Protocol name that is either `mqtt` or `amqp`|`mqtt`|
 |`T_THREAD_NUM`|The number of threads that you would run simultaneously|2|
-|`T_VERBOSE`|Switch whether it shows messages which get by subscribing|False|
+|`T_VERBOSE`|Switch whether it will show messages gotten by subscribing|False|
 
 # (Appendix) Run RabbitMQ with MQTT
 
+Dockerfile of RabbitMQ with MQTT
+
+```Dockerfile
+FROM rabbitmq:3.7-management
+RUN rabbitmq-plugins enable --offline rabbitmq_mqtt rabbitmq_federation_management rabbitmq_stomp
+```
+(cf. https://hub.docker.com/_/rabbitmq)
+
+Run
+
 ```bash
-docker run -d --name rbmq \
+docker run -d --rm --name rbmq \
     -p 4369:4369 \
     -p 25672:25672 \
     -p 5671:5671 \
